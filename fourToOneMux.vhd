@@ -4,8 +4,8 @@ USE ieee.std_logic_1164.ALL;
 ENTITY fourToOneMux IS
 	PORT(
 		i_s0, i_s1 : IN STD_LOGIC; --Selector leftSwitch
-		i_in00, i_in01, i_in10, i_in11 : IN STD_LOGIC;
-		o_disp : OUT STD_LOGIC);
+		i_in00, i_in01, i_in10, i_in11 : IN STD_LOGIC_VECTOR(7 downto 0);
+		o_disp : OUT STD_LOGIC_VECTOR(7 downto 0));
 END fourToOneMux;
 
 ARCHITECTURE behavior OF fourToOneMux IS
@@ -16,13 +16,13 @@ BEGIN
 mux:
 PROCESS(i_s0, i_s1)
 BEGIN
-	IF(i_s0 = 0 and i_s1 = 0) THEN
+	IF(i_s0 = '0' and i_s1 = '0') THEN
 	int_disp <= i_in00;
-	ELSIF(i_s0 = 0 and i_s1 = 1) THEN
+	ELSIF(i_s0 = '0' and i_s1 = '1') THEN
 	int_disp <= i_in01;
-	ELSIF(i_s0 = 1 and i_s1 = 0) THEN
+	ELSIF(i_s0 = '1' and i_s1 = '0') THEN
 	int_disp <= i_in10;
-	ELSIF(i_s0 = 1 and i_s1 = 1) THEN
+	ELSIF(i_s0 = '1' and i_s1 = '1') THEN
 	int_disp <= i_in11;
 	END IF;
 END PROCESS mux;
