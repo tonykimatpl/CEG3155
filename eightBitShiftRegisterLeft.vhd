@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.ALL;
 
 ENTITY eightBitShiftRegisterLeft IS
 	PORT(
-		i_resetBar, i_load: STD_LOGIC;
+		i_resetBar, i_load:IN STD_LOGIC;
 		i_clk: IN STD_LOGIC;
 		i_Value: IN STD_LOGIC_VECTOR(7 downto 0);
 		o_Value: OUT STD_LOGIC_VECTOR(7 downto 0));
@@ -16,7 +16,7 @@ ARCHITECTURE behavior OF eightBitShiftRegisterLeft IS
 		PORT(
 			i_resetBar: IN STD_LOGIC;
 			i_d: IN STD_LOGIC;
-			i_enable: IN STD_LOGIC;
+			i_en : IN STD_LOGIC;
 			i_clk: IN STD_LOGIC;
 			o_q, o_qBar: OUT STD_LOGIC);
 	END COMPONENT;
@@ -25,16 +25,16 @@ BEGIN
 
 msb:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
-	i_d => int_Value(6),
-	i_enable => i_load,
+	i_d => i_Value(6),
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(7),
 	o_qBar => int_notValue(7));
 	
 ssb6:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
-	i_d => int_Value(5),
-	i_enable => i_load,
+	i_d => i_Value(5),
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(6),
 	o_qBar => int_notValue(6));
@@ -42,31 +42,31 @@ ssb6:enRdFF_2
 ssb5:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
 	i_d => i_Value(4),
-	i_enable => i_load,
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(5),
 	o_qBar => int_notValue(5));
 	
 ssb4:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
-	i_d => int_Value(3),
-	i_enable => i_load,
+	i_d => i_Value(3),
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(4),
 	o_qBar => int_notValue(4));
 	
 ssb3:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
-	i_d => int_Value(2),
-	i_enable => i_load,
+	i_d => i_Value(2),
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(3),
 	o_qBar => int_notValue(3));
 	
 ssb2:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
-	i_d => int_Value(1),
-	i_enable => i_load,
+	i_d => i_Value(1),
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(2),
 	o_qBar => int_notValue(2));
@@ -74,7 +74,7 @@ ssb2:enRdFF_2
 ssb1:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
 	i_d => i_Value(7),
-	i_enable => i_load,
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(1),
 	o_qBar => int_notValue(1));
@@ -82,7 +82,7 @@ ssb1:enRdFF_2
 lsb:enRdFF_2
 	PORT MAP (i_resetBar => i_resetBar,
 	i_d => i_Value(0),
-	i_enable => i_load,
+	i_en => i_load,
 	i_clk => i_clk,
 	o_q => int_Value(0),
 	o_qBar => int_notValue(0));
