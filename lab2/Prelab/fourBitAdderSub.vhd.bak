@@ -1,0 +1,82 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY fourBitAdder IS
+	PORT(
+        i_Ai, i_Bi		: IN	STD_LOGIC_VECTOR(3 downto 0);
+        i_Co            : IN    STD_LOGIC;
+		o_CarryOut		: OUT	STD_LOGIC;
+		o_Sum			: OUT	STD_LOGIC_VECTOR(3 downto 0));
+END fourBitAdder;
+
+ARCHITECTURE rtl OF fourBitAdder IS
+	SIGNAL int_Sum, int_CarryOut : STD_LOGIC_VECTOR(3 downto 0);
+	SIGNAL gnd : STD_LOGIC;
+	
+
+	COMPONENT oneBitAdder
+	PORT(
+		i_CarryIn		: IN	STD_LOGIC;
+		i_Ai, i_Bi		: IN	STD_LOGIC;
+		o_Sum, o_CarryOut	: OUT	STD_LOGIC);
+	END COMPONENT;
+	signal opr0 : STD_LOGIC;
+	signal opr1 : STD_LOGIC;
+	signal opr2 : STD_LOGIC;
+	signal opr3 : STD_LOGIC;
+
+
+
+
+
+
+BEGIN
+
+	-- Concurrent Signal Assignment
+	gnd <= '0';
+
+	opr1 <= i_Bi(1) XOR i_Co;
+	opr2 <= i_Bi(2) XOR i_Co;
+	opr3 <= i_Bi(3) XOR i_Co;
+	opr0 <= i_Bi(0) XOR i_Co;
+
+
+
+
+	
+    
+add3: oneBitAdder
+	PORT MAP (i_CarryIn => int_CarryOut(2), 
+			  i_Ai => i_Ai(3),
+			  i_Bi => opr3,
+			  o_Sum => int_Sum(3),
+			  o_CarryOut => int_CarryOut(3));
+
+
+add2: oneBitAdder
+	PORT MAP (i_CarryIn => int_CarryOut(1), 
+			  i_Ai => i_Ai(2),
+			  i_Bi => opr2,
+			  o_Sum => int_Sum(2),
+			  o_CarryOut => int_CarryOut(2));
+
+add1: oneBitAdder
+	PORT MAP (i_CarryIn => int_CarryOut(0), 
+			  i_Ai => i_Ai(1),
+			  i_Bi => opr1,
+			  o_Sum => int_Sum(1),
+			  o_CarryOut => int_CarryOut(1));
+
+add0: oneBitAdder
+	PORT MAP (i_CarryIn => i_Co, 
+			  i_Ai => i_Ai(0),
+			  i_Bi => opr0,
+			  o_Sum => int_Sum(0),
+			  o_CarryOut => int_CarryOut(0));
+
+	-- Output Driver
+	o_Sum <= int_Sum;
+	o_CarryOut <= int_CarryOut(3);
+
+END rtl;
+

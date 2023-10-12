@@ -1,0 +1,65 @@
+|fourBitAdderSub
+i_Ai[0] => oneBitAdder:add0.i_Ai
+i_Ai[1] => oneBitAdder:add1.i_Ai
+i_Ai[2] => oneBitAdder:add2.i_Ai
+i_Ai[3] => oneBitAdder:add3.i_Ai
+i_Bi[0] => opr0.IN0
+i_Bi[1] => opr1.IN0
+i_Bi[2] => opr2.IN0
+i_Bi[3] => opr3.IN0
+i_Co => opr1.IN1
+i_Co => opr2.IN1
+i_Co => opr3.IN1
+i_Co => opr0.IN1
+i_Co => oneBitAdder:add0.i_CarryIn
+o_CarryOut <= oneBitAdder:add3.o_CarryOut
+o_Sum[0] <= oneBitAdder:add0.o_Sum
+o_Sum[1] <= oneBitAdder:add1.o_Sum
+o_Sum[2] <= oneBitAdder:add2.o_Sum
+o_Sum[3] <= oneBitAdder:add3.o_Sum
+
+
+|fourBitAdderSub|oneBitAdder:add3
+i_CarryIn => int_CarryOut3.IN0
+i_CarryIn => int_CarryOut1.IN0
+i_Ai => int_CarryOut3.IN1
+i_Ai => int_CarryOut1.IN1
+i_Bi => int_CarryOut2.IN1
+i_Bi => o_Sum~0.IN1
+o_Sum <= o_Sum~0.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourBitAdderSub|oneBitAdder:add2
+i_CarryIn => int_CarryOut3.IN0
+i_CarryIn => int_CarryOut1.IN0
+i_Ai => int_CarryOut3.IN1
+i_Ai => int_CarryOut1.IN1
+i_Bi => int_CarryOut2.IN1
+i_Bi => o_Sum~0.IN1
+o_Sum <= o_Sum~0.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourBitAdderSub|oneBitAdder:add1
+i_CarryIn => int_CarryOut3.IN0
+i_CarryIn => int_CarryOut1.IN0
+i_Ai => int_CarryOut3.IN1
+i_Ai => int_CarryOut1.IN1
+i_Bi => int_CarryOut2.IN1
+i_Bi => o_Sum~0.IN1
+o_Sum <= o_Sum~0.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|fourBitAdderSub|oneBitAdder:add0
+i_CarryIn => int_CarryOut3.IN0
+i_CarryIn => int_CarryOut1.IN0
+i_Ai => int_CarryOut3.IN1
+i_Ai => int_CarryOut1.IN1
+i_Bi => int_CarryOut2.IN1
+i_Bi => o_Sum~0.IN1
+o_Sum <= o_Sum~0.DB_MAX_OUTPUT_PORT_TYPE
+o_CarryOut <= o_CarryOut~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
